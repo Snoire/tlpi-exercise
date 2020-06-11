@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
         exit(EXIT_FAILURE);
     }
 
-    for (int i = 0; i < (size_t) val; ++i) {
+    for (int i = 0; i < val; ++i) {
         if (argc == 4)    /* a third command-line argument (x) is supplied */
             if (lseek(fd, 0, SEEK_END) == -1)
                 errExit("lseek");
