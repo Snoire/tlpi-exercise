@@ -1,13 +1,9 @@
 /* Exercise 5-4 */
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <errno.h>
-
-#define errExit(msg)    do { perror(msg); exit(EXIT_FAILURE);\
-                          } while (0)
 
 
 int dup_f(int oldfd)

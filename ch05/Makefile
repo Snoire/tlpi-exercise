@@ -7,7 +7,7 @@ verify_dupfd.o : dup_fcntl.h
 verify_dupfd : verify_dupfd.o dup_fcntl.o
 
 clean : cleanobj
-	/bin/rm -f $(targets)
+	/bin/rm -f $(targets) tfile
 
 cleanobj :
 	/bin/rm -f *.o
