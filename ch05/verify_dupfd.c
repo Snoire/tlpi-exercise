@@ -15,7 +15,7 @@ int main()
 {
     int fd0, fd1, fd2=12;
     /* verify that duplicated file descriptors share a file offset value */
-    fd0 = open("tfile", O_RDWR | O_CREAT, 0644);
+    fd0 = open("tfile", O_RDWR | O_CREAT | O_TRUNC, 0644);
     if (fd0 == -1)
         errExit("open");
 
@@ -24,7 +24,9 @@ int main()
     if ((dup2_f(fd0, fd2)) == -1)
         errExit("dup_f");
 
-    if (write(fd0, "test", 4) == -1)
+    printf("fd0: %d, fd1: %d, fd2: %d\n", fd0, fd1, fd2);
+
+    if (write(fd0, "test", 5) == -1)
         errExit("write");
 
     off_t curoff0, curoff1, curoff2;
@@ -55,6 +57,23 @@ int main()
     accessMode = flags0 & O_ACCMODE;
     if (accessMode == O_RDWR)
         printf("read/write\n");
+
+    if (close(fd0) == -1)
+        errExit("close");
+    if (close(fd1) == -1)
+        errExit("close");
+
+    /* all file descriptors should be closed, otherwise,
+       the resources associated won't be freed */
+    char buf[10] = "";
+    if ((curoff2 = lseek(fd2, 0, SEEK_SET)) == -1)
+        errExit("lseek");
+    if (read(fd2, buf, 5) == -1)
+        errExit("read");
+    printf("buf is %s\n", buf);
+
+    if (close(fd2) == -1)
+        errExit("close");
 
     return 0;
 }

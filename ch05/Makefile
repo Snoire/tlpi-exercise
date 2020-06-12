@@ -1,4 +1,5 @@
-targets = large_file write_append atomic_append verify_dupfd
+targets = large_file write_append atomic_append \
+          verify_dupfd output_after_write
 
 all : $(targets)
 .PHONY : all clean cleanobj
