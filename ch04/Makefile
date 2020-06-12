@@ -1,7 +1,7 @@
-objects = tee cp test-hole
+targets = tee cp test-hole
 
-all : $(objects)
+all : $(targets)
 .PHONY : all clean
 
 clean :
-	/bin/rm -f *.o $(objects)
+	/bin/rm -f *.o $(targets)

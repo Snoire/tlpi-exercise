@@ -1,7 +1,13 @@
-objects = large_file write_append atomic_append
+targets = large_file write_append atomic_append verify_dupfd
 
-all : $(objects)
-.PHONY : all clean
+all : $(targets)
+.PHONY : all clean cleanobj
 
-clean :
-	/bin/rm -f *.o $(objects)
+verify_dupfd.o : dup_fcntl.h
+verify_dupfd : verify_dupfd.o dup_fcntl.o
+
+clean : cleanobj
+	/bin/rm -f $(targets)
+
+cleanobj :
+	/bin/rm -f *.o
