@@ -1,0 +1,6 @@
+# ignore all files except Makefile, LICENSE, all .c and .h files
+**/*
+!**/*.c
+!**/*.h
+!**/Makefile
+!**/LICENSE

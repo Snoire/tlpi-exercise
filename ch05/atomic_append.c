@@ -34,6 +34,7 @@ int main(int argc, char *argv[])
     if (fd == -1)
         errExit("open");
 
+    /* convert argv[2] to a long integer */
     str = argv[2];
     errno = 0;
     val = strtol(str, &endptr, 10);
@@ -48,6 +49,7 @@ int main(int argc, char *argv[])
         fprintf(stderr, "No digits were found\n");
         exit(EXIT_FAILURE);
     }
+
 
     for (int i = 0; i < val; ++i) {
         if (argc == 4)    /* a third command-line argument (x) is supplied */
